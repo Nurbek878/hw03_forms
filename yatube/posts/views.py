@@ -1,8 +1,10 @@
-from django.core.paginator import Paginator
-from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.models import User
-from .models import Group, Post
+from django.core.paginator import Paginator
+from django.shortcuts import get_object_or_404, redirect, render
+
 from posts.forms import PostForm
+
+from .models import Group, Post
 
 POST_ON_PAGE = 10
 
