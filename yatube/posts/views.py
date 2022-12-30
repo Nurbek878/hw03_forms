@@ -1,6 +1,5 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 
 
@@ -12,7 +11,7 @@ from .utils import paginator_work
 def index(request):
     post_list = Post.objects.all()
     context = {
-        'page_obj': paginator_work(request,post_list),
+        'page_obj': paginator_work(request, post_list),
     }
     return render(request, 'posts/index.html', context)
 
@@ -22,7 +21,7 @@ def group_posts(request, slug):
     post_list = group.posts.filter(group=group)
     context = {
         'group': group,
-        'page_obj': paginator_work(request,post_list),
+        'page_obj': paginator_work(request, post_list),
     }
     return render(request, 'posts/group_list.html', context)
 
@@ -32,7 +31,7 @@ def profile(request, username):
     user_posts = user.posts.all()
     context = {
         'post_count': user_posts.count(),
-        'page_obj': paginator_work(request,user_posts),
+        'page_obj': paginator_work(request, user_posts),
         'author': user,
     }
     return render(request, 'posts/profile.html', context)
@@ -65,7 +64,7 @@ def post_edit(request, post_id):
     form = PostForm(request.POST or None, instance=post)
     if request.user != post.author or request.method != 'POST':
         return render(request, 'posts/create_post.html', {
-        'form': form, 'post': post, 'is_edit': True, })
+            'form': form, 'post': post, 'is_edit': True, })
     if form.is_valid():
         post.save()
     return redirect('posts:post_detail', post_id=post_id)
