@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-         Пост {{  post.text|truncatechars:30 }}
+         Пост {{ post.text|truncatechars:30 }}
 {% endblock %}
 
 {% block content %}
@@ -14,7 +14,7 @@
         </li>
         <li class="list-group-item">
           {% if post.group %} 
-          Группа: {{post.group}}<br>
+          Группа: {{ post.group }}<br>
           <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
           {% endif %} 
         </li>
